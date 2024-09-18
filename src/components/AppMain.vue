@@ -27,6 +27,7 @@ export default {
 main {
     background-color: orange;
     padding: 2rem;
+    min-height: 100vh;
 
     select {
         width: 100px;

@@ -13,12 +13,24 @@ export default {
 </script>
 
 <template>
-    <h1>MAIN</h1>
-    <MainCardList />
+    <main>
+        <div class="container">
+            <select name="Tipo" id="type">
+                <option value="alien">Alien</option>
+            </select>
+        </div>
+        <MainCardList />
+    </main>
 </template>
 
-<style scoped>
-* {
+<style lang="scss" scoped>
+main {
     background-color: orange;
+    padding: 2rem;
+
+    select {
+        width: 100px;
+    }
+
 }
 </style>

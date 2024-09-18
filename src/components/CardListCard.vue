@@ -19,8 +19,12 @@ export default {
 </script>
 
 <template>
-    <img :src=cardImage alt="OK">
-    <span>{{ cardName }}</span>
+    <div class="single-card">
+        <figure>
+            <img class="img-fluid" :src=cardImage alt="cardName">
+        </figure>
+        <h4 class="text-light">{{ cardName }}</h4>
+    </div>
 </template>
 
 <style scoped></style>

@@ -30,8 +30,20 @@ export default {
 </script>
 
 <template>
-    <CardListCard v-for="card in cardList" :key="card.id" :cardName="card.name"
-        :cardImage="card.card_images[0].image_url_small" />
+    <div class="card-list">
+        <div class="container">
+            <div class="row">
+                <div v-for="card in cardList" class="col-3">
+                    <CardListCard :key="card.id" :cardName="card.name"
+                        :cardImage="card.card_images[0].image_url_small" />
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.card-list {
+    padding: 2rem;
+}
+</style>

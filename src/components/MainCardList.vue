@@ -47,9 +47,10 @@ export default {
 
 <style lang="scss" scoped>
 .card-list {
-    padding: 2rem;
+    padding: 3rem;
     border: 20px solid brown;
     border-radius: 20px;
+    position: relative;
 
     h3 {
         background-color: brown;
@@ -70,8 +71,8 @@ export default {
 
     position: absolute;
     right: 50%;
-    top: 27%;
-    transform: translate(50%, 27%);
+    top: 25%;
+    transform: translate(50%, 25%);
 }
 
 .loader:before {

@@ -1,13 +1,33 @@
 <script>
 import MainCardList from "./MainCardList.vue"
+import axios from 'axios';
+
 export default {
     data() {
         return {
-
+            apiArchetypeUrl: "https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0",
+            apiCardUrl: "https://db.ygoprodeck.com/api/v7/cardinfo.php?num=60&offset=0",
+            cardList: [],
+            loaded: false,
         }
     },
     components: {
         MainCardList,
+    },
+    methods: {
+        getCardsList() {
+            axios.get(this.apiCardUrl).then((response) => {
+                console.log(response.data.data);
+                this.cardList = response.data.data;
+            })
+
+            setTimeout(() => {
+                this.loaded = true;
+            }, 2000);
+        }
+    },
+    created() {
+        this.getCardsList();
     }
 }
 </script>
@@ -19,7 +39,7 @@ export default {
                 <option value="alien">Alien</option>
             </select>
         </div>
-        <MainCardList />
+        <MainCardList :cardList="cardList" :loaded="loaded" />
     </main>
 </template>
 

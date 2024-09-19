@@ -21,10 +21,10 @@ export default {
 <template>
     <div class="single-card">
         <figure>
-            <img class="img-fluid" :src=cardImage alt="cardName">
+            <img class="img-fluid card-front" :src=cardImage alt="cardName">
         </figure>
-        <h4 class="text-light">{{ cardName }}</h4>
+        <h4 class="fs-5 text-light text-center">{{ cardName }}</h4>
     </div>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

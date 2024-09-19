@@ -42,6 +42,8 @@ export default {
 <style scoped>
 .card-list {
     padding: 2rem;
+    border: 20px solid brown;
+    border-radius: 20px;
 }
 
 /* HTML: <div class="loader"></div> */
@@ -57,8 +59,8 @@ export default {
 
     position: absolute;
     right: 50%;
-    top: 50%;
-    transform: translate(50%, 50%);
+    top: 27%;
+    transform: translate(50%, 27%);
 }
 
 .loader:before {

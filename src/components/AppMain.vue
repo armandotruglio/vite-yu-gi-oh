@@ -5,9 +5,10 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            apiArchetypeUrl: "https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0",
+            apiArchetypeUrl: "https://db.ygoprodeck.com/api/v7/archetypes.php",
             apiCardUrl: "https://db.ygoprodeck.com/api/v7/cardinfo.php?num=60&offset=0",
             cardList: [],
+            cardArchetypeList: [],
             loaded: false,
         }
     },
@@ -15,6 +16,12 @@ export default {
         MainCardList,
     },
     methods: {
+        getCardArchetype() {
+            axios.get(this.apiArchetypeUrl).then((response) => {
+                console.log(response.data);
+                this.cardArchetypeList = response.data;
+            })
+        },
         getCardsList() {
             axios.get(this.apiCardUrl).then((response) => {
                 console.log(response.data.data);
@@ -27,6 +34,7 @@ export default {
         }
     },
     created() {
+        this.getCardArchetype();
         this.getCardsList();
     }
 }
@@ -36,7 +44,9 @@ export default {
     <main>
         <div class="container">
             <select name="Tipo" id="type">
-                <option value="alien">Alien</option>
+                <option v-for="(archetype, index) in cardArchetypeList" :key="index" value="archetype.archetype_name">
+                    {{ archetype.archetype_name }}
+                </option>
             </select>
         </div>
         <MainCardList :cardList="cardList" :loaded="loaded" />

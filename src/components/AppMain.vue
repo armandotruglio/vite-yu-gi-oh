@@ -9,6 +9,7 @@ export default {
             apiCardUrl: "https://db.ygoprodeck.com/api/v7/cardinfo.php?num=60&offset=0",
             cardList: [],
             cardArchetypeList: [],
+            selectedArchetype: '',
             loaded: false,
         }
     },
@@ -16,21 +17,34 @@ export default {
         MainCardList,
     },
     methods: {
+        //Funzione che chiama API che fornisce la lista di archetipi di carte
         getCardArchetype() {
             axios.get(this.apiArchetypeUrl).then((response) => {
                 console.log(response.data);
                 this.cardArchetypeList = response.data;
             })
         },
-        getCardsList() {
-            axios.get(this.apiCardUrl).then((response) => {
-                console.log(response.data.data);
-                this.cardList = response.data.data;
-            })
+        getCardsList(archetype = "") {
+            if (archetype === "") {
+                axios.get(this.apiCardUrl).then((response) => {
+                    console.log(response.data.data);
+                    this.cardList = response.data.data;
+                })
+            }
+            else {
+                axios.get(this.apiCardUrl, {
+                    params: {
+                        archetype: archetype
+                    }
+                }).then((response) => {
+                    console.log(response.data.data);
+                    this.cardList = response.data.data;
+                })
+            }
 
             setTimeout(() => {
                 this.loaded = true;
-            }, 2000);
+            }, 500);
         }
     },
     created() {
@@ -43,12 +57,14 @@ export default {
 <template>
     <main>
         <div class="container">
-            <select name="Tipo" id="type">
-                <option v-for="(archetype, index) in cardArchetypeList" :key="index" value="archetype.archetype_name">
+            <select v-model="selectedArchetype" @change="this.getCardsList(selectedArchetype), loaded = false">
+                <option disabled value="">Scegli un archetipo</option>
+                <option v-for="(archetype, index) in cardArchetypeList" :key="index" :value="archetype.archetype_name">
                     {{ archetype.archetype_name }}
                 </option>
             </select>
         </div>
+
         <MainCardList :cardList="cardList" :loaded="loaded" />
     </main>
 </template>

@@ -27,8 +27,13 @@ export default {
 
 <template>
     <div class="card-list">
+
         <div class="loader" v-if="!this.loaded"></div>
         <div class="container" v-show="this.loaded">
+            <div class="found-card-number">
+                <h3 class="mb-4 text-center p-3 text-light">Carte trovate: {{ cardList.length }}</h3>
+            </div>
+
             <div class="row">
                 <div v-for="card in cardList" class="col-2">
                     <CardListCard :key="card.id" :cardName="card.name"
@@ -36,14 +41,20 @@ export default {
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .card-list {
     padding: 2rem;
     border: 20px solid brown;
     border-radius: 20px;
+
+    h3 {
+        background-color: brown;
+        border-radius: 20px;
+    }
 }
 
 /* HTML: <div class="loader"></div> */
